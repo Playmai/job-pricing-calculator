@@ -57,6 +57,9 @@
   <script>
     if (window.location.href.includes("success")) {
   localStorage.setItem("paid", "true");
+  const now = new Date().toISOString();
+  localStorage.setItem("SubStartDate", now);
+
 }
   </script>
 <div>
@@ -72,6 +75,7 @@
 
 </body>
 </html>
+
 
 
 
