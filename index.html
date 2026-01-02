@@ -188,11 +188,6 @@
   return localStorage.getItem("trialStartDate");
 }
 
-function setTrialStart() {
-  const now = new Date().toISOString();
-  localStorage.setItem("trialStartDate", now);
-}
-
   function getTrialsAllowed() {
     return 2;
   }
@@ -311,6 +306,7 @@ function calculate() {
 
 </body>
 </html>
+
 
 
 
