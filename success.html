@@ -54,6 +54,11 @@
 </head>
 <body>
 
+  <script>
+    if (window.location.href.includes("success")) {
+  localStorage.setItem("paid", "true");
+}
+  </script>
 <div>
   <h1>🎉 Payment Successful!</h1>
   <p>Thank you for unlocking unlimited project pricing. You can now calculate **as many projects as you want**, with no limits.</p>
@@ -67,5 +72,6 @@
 
 </body>
 </html>
+
 
 
