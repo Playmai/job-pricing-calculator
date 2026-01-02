@@ -196,13 +196,9 @@
     localStorage.setItem("trialsUsed", used);
   }
 
-  function checkTrialReset() {
-  const start = getTrialStart();
-  if (!start) {
-    // primeira vez
-    setTrialStart();
-    return;
-  }
+  function checkSubReset() {
+  const start = getSubStart();
+  
 
   const now = new Date();
   const startDate = new Date(start);
@@ -210,8 +206,8 @@
 
   if (diffDays >= 30) {
     // reset de trials
-    localStorage.removeItem("trialsUsed");
-    setTrialStart();
+    localStorage.removeItem("paid");
+   
   }
 }
 
@@ -306,6 +302,7 @@ function calculate() {
 
 </body>
 </html>
+
 
 
 
