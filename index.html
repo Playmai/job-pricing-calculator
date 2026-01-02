@@ -136,6 +136,7 @@
     <p>Underpricing doesn’t feel dramatic — but it slowly kills motivation and income.</p>
   </div>
 
+  
   <!-- CALCULATOR -->
   <div id="calculator" class="box">
     <h2>Project Price Calculator</h2>
@@ -183,6 +184,14 @@
   function getTrialsUsed() {
     return parseInt(localStorage.getItem("trialsUsed")) || 0;
   }
+  function getTrialStart() {
+  return localStorage.getItem("trialStartDate");
+}
+
+function setTrialStart() {
+  const now = new Date().toISOString();
+  localStorage.setItem("trialStartDate", now);
+}
 
   function getTrialsAllowed() {
     return 2;
@@ -192,12 +201,47 @@
     localStorage.setItem("trialsUsed", used);
   }
 
-  function calculate() {
+  function checkTrialReset() {
+  const start = getTrialStart();
+  if (!start) {
+    // primeira vez
+    setTrialStart();
+    return;
+  }
+
+  const now = new Date();
+  const startDate = new Date(start);
+  const diffDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+
+  if (diffDays >= 30) {
+    // reset de trials
+    localStorage.removeItem("trialsUsed");
+    setTrialStart();
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+  
+function calculate() {
   // 1. Checar se usuário é pago
   if (localStorage.getItem("paid") === "true") {
     runCalculation(); // função que faz a conta normalmente
     return;
   }
+
+
+  
+
+  checkTrialReset(); // reset se passaram 30 dias
 
   // 2. Se não for pago, continua o fluxo free trial
   let trialsUsed = getTrialsUsed();
@@ -211,6 +255,7 @@
   runCalculation();
   trialsUsed++;
   saveTrials(trialsUsed);
+
 }
 
 
@@ -266,6 +311,7 @@
 
 </body>
 </html>
+
 
 
 
